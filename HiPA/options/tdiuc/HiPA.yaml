@@ -1,0 +1,120 @@
+exp:
+  dir: logs/tdiuc/HiPA
+  resume:  #last #, best_[...], or empty (from scratch)
+dataset:
+  import: HiPA.datasets.factory
+  name: tdiuc 
+  dir: data/vqa/tdiuc
+  train_split: train
+  eval_split: val # or test
+  proc_split: train # or trainval (preprocessing split, must be equal to train_split)
+  nb_threads: 4
+  batch_size: 200
+  nans:  1480 
+  minwcount: 0
+  nlp: mcb
+  samplingans: True
+  dir_rcnn: data/vqa/data/vqa/tdiuc/extract_rcnn/2018-04-27_bottom-up-attention_fixed_36
+  vg: False
+  dir_vg: data/vqa/vgenome
+  dir_rcnn_vg: data/vqa/data/vqa/vgenome/extract_rcnn/2018-04-27_bottom-up-attention_fixed_36
+model:
+  name: default
+  network:
+    import: HiPA.models.networks.factory
+    name: HiPA
+    txt_enc:
+      name: skipthoughts
+      type: BayesianUniSkip
+      dropout: 0.25
+      fixed_emb: False
+      dir_st: data/skip-thoughts
+    self_q_att: True 
+    self_v_att:
+      output_dim: 1
+      fusion:
+        type: block
+        input_dims: [4800, 3288] 
+        output_dim: 1
+        mm_dim: 1600
+        chunks: 20
+        rank: 10
+        dropout_input: 0.1
+        dropout_pre_lin: 0.
+    n_step: 4
+    shared: True
+    cell:
+      residual: True
+      fusion_module_v:
+        type: block
+        input_dims: [4800, 6576]
+        output_dim: 6576
+        mm_dim: 1600
+        chunks: 20
+        rank: 10
+        dropout_input: 0.1
+        dropout_pre_lin: 0.
+      fusion_module_v2:
+        type: block
+        input_dims: [6576, 6576]
+        output_dim: 6576
+        mm_dim: 1600
+        chunks: 20
+        rank: 10
+        dropout_input: 0.1
+        dropout_pre_lin: 0.
+      fusion_module_q:
+        type: block
+        input_dims: [4800, 6576] 
+        output_dim: 4800
+        mm_dim: 1600
+        chunks: 20
+        rank: 10
+        dropout_input: 0.1
+        dropout_pre_lin: 0.
+      q_attention: True
+    agg:
+      type: none 
+      # weldon:
+      #   kmax: 2
+      #   kmin: 2
+    classif:
+      fusion:
+        type: block
+        input_dims: [4800, 6576] 
+        output_dim: 1480  #Fixed
+        mm_dim: 1600
+        chunks: 20
+        rank: 10
+        dropout_input: 0.1
+        dropout_pre_lin: 0.
+  criterion:
+    import: HiPA.models.criterions.factory
+    name: vqa_cross_entropy
+  metric:
+    import: HiPA.models.metrics.factory
+    name: vqa_accuracies
+optimizer:
+  import: HiPA.optimizers.factory
+  name: Adam
+  lr: 0.0003
+  gradual_warmup_steps: [0.5, 2.0, 7.0] #torch.linspace
+  lr_decay_epochs: [14, 24, 2] #range
+  lr_decay_rate: .25
+engine:
+  name: logger
+  debug: False
+  print_freq: 10
+  nb_epochs: 25
+  saving_criteria:
+  - eval_epoch.accuracy_top1:max
+misc:
+  logs_name:
+  cuda: True
+  seed: 1337
+view:
+  name: plotly
+  items:
+  - logs:train_epoch.loss+logs:eval_epoch.loss
+  - logs:train_epoch.accuracy_top1+logs:eval_epoch.accuracy_top1
+  - logs_train_oe:train_epoch.overall+logs_val_oe:eval_epoch.overall

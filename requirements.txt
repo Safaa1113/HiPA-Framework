@@ -1,0 +1,12 @@
+torch
+skipthoughts
+pretrainedmodels
+opencv-python
+tqdm
+transformers
+matplotlib
+h5py
+scipy
+seaborn
+plotly
+click

@@ -1,0 +1,123 @@
+exp:
+  dir: logs/vqa2/attention
+  resume: null
+dataset:
+  import: murel.datasets.factory
+  name: vqa2
+  dir: data/vqa/vqa2
+  train_split: train
+  eval_split: val
+  proc_split: train
+  nb_threads: 4
+  batch_size: 84
+  nans: 3000
+  minwcount: 0
+  nlp: mcb
+  samplingans: true
+  dir_rcnn: data/vqa/coco/extract_rcnn/2018-04-27_bottom-up-attention_fixed_36
+  vg: false
+  dir_vg: data/vqa/vgenome
+  dir_rcnn_vg: data/vqa/vgenome/extract_rcnn/2018-04-27_bottom-up-attention_fixed_36
+model:
+  name: default
+  network:
+    import: murel.models.networks.factory
+    name: murel_net
+    txt_enc:
+      name: skipthoughts
+      type: BayesianUniSkip
+      dropout: 0.25
+      fixed_emb: false
+      dir_st: data/skip-thoughts
+    self_q_att: true
+    n_step: 3
+    shared: true
+    cell:
+      residual: true
+      fusion:
+        type: block
+        input_dims:
+        - 4800
+        - 2048
+        output_dim: 2048
+        mm_dim: 1000
+        chunks: 20
+        rank: 15
+        dropout_input: 0.1
+        dropout_pre_lin: 0.0
+      pairwise:
+        residual: true
+        fusion_coord:
+          type: block
+          input_dims:
+          - 4
+          - 4
+          output_dim: 2048
+          mm_dim: 200
+          chunks: 5
+          rank: 5
+          dropout_input: 0.0
+          dropout_pre_lin: 0.0
+        fusion_feat:
+          type: block
+          input_dims:
+          - 2048
+          - 2048
+          output_dim: 2048
+          mm_dim: 200
+          chunks: 5
+          rank: 5
+          dropout_input: 0.0
+          dropout_pre_lin: 0.0
+        agg:
+          type: max
+    agg:
+      type: max
+    classif:
+      fusion:
+        type: block
+        input_dims:
+        - 4800
+        - 2048
+        output_dim: 3000
+        mm_dim: 1600
+        chunks: 20
+        rank: 10
+        dropout_input: 0.1
+        dropout_pre_lin: 0.0
+  criterion:
+    import: murel.models.criterions.factory
+    name: vqa_cross_entropy
+  metric:
+    import: murel.models.metrics.factory
+    name: vqa_accuracies
+optimizer:
+  import: murel.optimizers.factory
+  name: Adam
+  lr: 0.0003
+  gradual_warmup_steps:
+  - 0.5
+  - 2.0
+  - 7.0
+  lr_decay_epochs:
+  - 14
+  - 24
+  - 2
+  lr_decay_rate: 0.25
+engine:
+  name: logger
+  debug: false
+  print_freq: 10
+  nb_epochs: 25
+  saving_criteria:
+  - eval_epoch.accuracy_top1:max
+misc:
+  logs_name: null
+  cuda: true
+  seed: 1337
+view:
+  name: plotly
+  items:
+  - logs:train_epoch.loss+logs:eval_epoch.loss
+  - logs:train_epoch.accuracy_top1+logs:eval_epoch.accuracy_top1
+  - logs_train_oe:train_epoch.overall+logs_val_oe:eval_epoch.overall

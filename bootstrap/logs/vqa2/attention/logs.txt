@@ -1,0 +1,134 @@
+[I 2020-06-25 23:52:08] .../murel/bootstrap/run.py.81: Saving environment info
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83: options: 
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:   dataset:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     batch_size: 84
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     dir: data/vqa/vqa2
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     dir_rcnn: data/vqa/coco/extract_rcnn/2018-04-27_bottom-up-attention_fixed_36
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     dir_rcnn_vg: data/vqa/vgenome/extract_rcnn/2018-04-27_bottom-up-attention_fixed_36
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     dir_vg: data/vqa/vgenome
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     eval_split: val
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     import: murel.datasets.factory
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     minwcount: 0
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     name: vqa2
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     nans: 3000
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     nb_threads: 4
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     nlp: mcb
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     proc_split: train
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     samplingans: True
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     train_split: train
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     vg: False
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:   engine:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     debug: False
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     name: logger
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     nb_epochs: 25
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     print_freq: 10
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     saving_criteria: ['eval_epoch.accuracy_top1:max']
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:   exp:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     dir: logs/vqa2/attention
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     resume: None
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:   misc:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     cuda: True
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     logs_name: None
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     seed: 1337
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:   model:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     criterion:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:       import: murel.models.criterions.factory
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:       name: vqa_cross_entropy
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     metric:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:       import: murel.models.metrics.factory
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:       name: vqa_accuracies
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     name: default
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     network:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:       agg:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:         type: max
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:       cell:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:         fusion:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           chunks: 20
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           dropout_input: 0.1
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           dropout_pre_lin: 0.0
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           input_dims: [4800, 2048]
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           mm_dim: 1000
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           output_dim: 2048
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           rank: 15
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           type: block
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:         pairwise:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           agg:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             type: max
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           fusion_coord:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             chunks: 5
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             dropout_input: 0.0
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             dropout_pre_lin: 0.0
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             input_dims: [4, 4]
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             mm_dim: 200
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             output_dim: 2048
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             rank: 5
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             type: block
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           fusion_feat:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             chunks: 5
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             dropout_input: 0.0
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             dropout_pre_lin: 0.0
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             input_dims: [2048, 2048]
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             mm_dim: 200
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             output_dim: 2048
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             rank: 5
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:             type: block
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           residual: True
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:         residual: True
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:       classif:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:         fusion:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           chunks: 20
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           dropout_input: 0.1
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           dropout_pre_lin: 0.0
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           input_dims: [4800, 2048]
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           mm_dim: 1600
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           output_dim: 3000
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           rank: 10
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:           type: block
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:       import: murel.models.networks.factory
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:       n_step: 3
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:       name: murel_net
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:       self_q_att: True
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:       shared: True
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:       txt_enc:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:         dir_st: data/skip-thoughts
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:         dropout: 0.25
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:         fixed_emb: False
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:         name: skipthoughts
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:         type: BayesianUniSkip
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:   optimizer:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     gradual_warmup_steps: [0.5, 2.0, 7.0]
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     import: murel.optimizers.factory
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     lr: 0.0003
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     lr_decay_epochs: [14, 24, 2]
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     lr_decay_rate: 0.25
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     name: Adam
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:   path_opts: /home/abr/Data/murel.bootstrap.pytorch/murel/options/vqa2/murel.yaml
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:   view:
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     items: ['logs:train_epoch.loss+logs:eval_epoch.loss', 'logs:train_epoch.accuracy_top1+logs:eval_epoch.accuracy_top1', 'logs_train_oe:train_epoch.overall+logs_val_oe:eval_epoch.overall']
+[S 2020-06-25 23:52:09] .../murel/bootstrap/run.py.83:     name: plotly
+[I 2020-06-25 23:52:09] .../murel/bootstrap/run.py.84: posix.uname_result(sysname='Linux', nodename='abr', release='5.3.0-59-generic', version='#53~18.04.1-Ubuntu SMP Thu Jun 4 14:58:26 UTC 2020', machine='x86_64')
+[I 2020-06-25 23:52:09] .../murel/bootstrap/run.py.88: Available GPUs: [0]
+[I 2020-06-25 23:52:09] ...trap/engines/factory.py.14: Creating engine...
+[I 2020-06-25 23:52:09] ...rap/datasets/factory.py.11: Creating dataset...
+[E 2020-06-25 23:52:09] ...murel/bootstrap/run.py.202: Traceback (most recent call last):
+  File "/home/abr/Data/murel.bootstrap.pytorch/murel/bootstrap/run.py", line 187, in main
+    run(path_opts=path_opts)
+  File "/home/abr/Data/murel.bootstrap.pytorch/murel/bootstrap/run.py", line 96, in run
+    engine.dataset = datasets.factory(engine)
+  File "/home/abr/Data/murel.bootstrap.pytorch/murel/bootstrap/datasets/factory.py", line 17, in factory
+    module = importlib.import_module(Options()['dataset']['import'])
+  File "/home/abr/anaconda3/lib/python3.7/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 953, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 953, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 965, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'murel'
+
