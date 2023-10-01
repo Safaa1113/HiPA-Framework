@@ -3,7 +3,7 @@ import math
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import MuHiPA.datasets.block as block
+import HiPA.datasets.block as block
 from torch.nn.utils.weight_norm import weight_norm
 from HiPA.datasets.block.models.networks.vqa_net import mask_softmax
 import math
